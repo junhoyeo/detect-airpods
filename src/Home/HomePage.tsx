@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import dedent from 'dedent';
 
 import { useMediaDevices } from '../utils/useMediaDevices';
 
@@ -63,14 +64,34 @@ export const HomePage = () => {
 
   const [text, setText] = useState<string>('');
   useEffect(() => {
+    const favicon: HTMLLinkElement =
+      document.querySelector("link[rel*='icon']");
     if (hasAirPods) {
+      document.title = 'With Airpods';
+      favicon.href = dedent`
+        data:image/svg+xml,
+        <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
+          <text y=%22.9em%22 font-size=%2290%22>🔊</text>
+        </svg>
+      `;
+
       hadAirPodsBefore.current = true;
       setText('');
       presentAirPods();
-    } else if (hadAirPodsBefore.current) {
-      dismissAirPods().then(() => setText('Connect your AirPods'));
     } else {
-      setText('Connect your AirPods');
+      document.title = 'Connect your AirPods';
+      favicon.href = dedent`
+        data:image/svg+xml,
+        <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
+          <text y=%22.9em%22 font-size=%2290%22>🔇</text>
+        </svg>
+      `;
+
+      if (hadAirPodsBefore.current) {
+        dismissAirPods().then(() => setText('Connect your AirPods'));
+      } else {
+        setText('Connect your AirPods');
+      }
     }
   }, [hasAirPods]);
 
