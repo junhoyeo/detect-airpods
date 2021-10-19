@@ -11,8 +11,8 @@ export const HomePage = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const devices = useMediaDevices();
 
-  const hadAirpodsBefore = useRef<boolean>(false);
-  const hasAirpods = devices.find((device) =>
+  const hadAirPodsBefore = useRef<boolean>(false);
+  const hasAirPods = devices.find((device) =>
     device.label.toLowerCase().includes('airpods'),
   );
 
@@ -48,8 +48,8 @@ export const HomePage = () => {
     }
   }, []);
 
-  const dismissAirpods = useCallback(() => animate(1, 148), []);
-  const presentAirpods = useCallback(() => animate(148, 1), []);
+  const dismissAirPods = useCallback(() => animate(1, 148), []);
+  const presentAirPods = useCallback(() => animate(148, 1), []);
 
   useEffect(() => {
     const preloadImages = () => {
@@ -63,21 +63,21 @@ export const HomePage = () => {
 
   const [text, setText] = useState<string>('');
   useEffect(() => {
-    if (hasAirpods) {
-      hadAirpodsBefore.current = true;
+    if (hasAirPods) {
+      hadAirPodsBefore.current = true;
       setText('');
-      presentAirpods();
-    } else if (hadAirpodsBefore.current) {
-      dismissAirpods().then(() => setText('Connect your Airpods'));
+      presentAirPods();
+    } else if (hadAirPodsBefore.current) {
+      dismissAirPods().then(() => setText('Connect your AirPods'));
     } else {
-      setText('Connect your Airpods');
+      setText('Connect your AirPods');
     }
-  }, [hasAirpods]);
+  }, [hasAirPods]);
 
   return (
     <Container>
       <AnimatePresence>
-        <Airpods ref={canvasRef} width={1158} height={770} />
+        <AirPods ref={canvasRef} width={1158} height={770} />
         {text && (
           <TextContainer
             key="text"
@@ -102,7 +102,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Airpods = styled.canvas`
+const AirPods = styled.canvas`
   width: 85%;
   max-width: 800px;
 `;
