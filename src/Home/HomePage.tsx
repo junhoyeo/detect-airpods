@@ -66,5 +66,13 @@ export const HomePage = () => {
   );
 };
 
-const Container = styled.div``;
-const Airpods = styled.canvas``;
+const Container = styled.div`
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Airpods = styled.canvas`
+  width: 85%;
+  max-width: 800px;
+`;
