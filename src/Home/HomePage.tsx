@@ -10,25 +10,11 @@ const delay = (milliseconds: number) =>
 export const HomePage = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const devices = useMediaDevices();
-  const airpods = devices.find((device) =>
+
+  const hadAirpodsBefore = useRef<boolean>(false);
+  const hasAirpods = devices.find((device) =>
     device.label.toLowerCase().includes('airpods'),
   );
-
-  // FIXME: replace hardcoded value
-  const hadAirpodsBefore = useRef<boolean>(false);
-  const [hasAirpods, setHasAirpods] = useState<boolean>(false);
-  useEffect(() => {
-    let tick = false;
-    let interval: NodeJS.Timeout;
-
-    setTimeout(() => {
-      interval = setInterval(() => {
-        tick = !tick;
-        setHasAirpods(tick);
-      }, 5000);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   const getCurrentFrame = useCallback(
     (index: number) => `/airpods/${index}.jpg`,
