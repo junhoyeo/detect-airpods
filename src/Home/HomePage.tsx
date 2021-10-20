@@ -121,6 +121,7 @@ export const HomePage = () => {
 };
 
 const Container = styled.div`
+  width: 100%;
   min-height: 100vh;
   position: relative;
 
@@ -140,6 +141,8 @@ const TextContainer = styled(motion.div)`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
+  transform-origin: center center;
 
   display: flex;
   justify-content: center;
