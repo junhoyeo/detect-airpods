@@ -110,6 +110,12 @@ export const HomePage = () => {
           </TextContainer>
         )}
       </AnimatePresence>
+      <GitHubLink
+        href="https://github.com/junhoyeo/detect-airpods"
+        target="_blank"
+      >
+        @GitHub
+      </GitHubLink>
     </Container>
   );
 };
@@ -152,5 +158,16 @@ const Text = styled.h1`
 
   @media (max-width: 350px) {
     font-size: 1.45rem;
+  }
+`;
+
+const GitHubLink = styled.a`
+  position: fixed;
+  bottom: 32px;
+  color: rgba(255, 255, 255, 0.25);
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    transform: scale(1.05);
   }
 `;
