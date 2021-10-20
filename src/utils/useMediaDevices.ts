@@ -9,7 +9,10 @@ export const useMediaDevices = () => {
         .enumerateDevices() //
         .then(setDevices);
 
-    update();
+    navigator.mediaDevices
+      .getUserMedia({ audio: true }) //
+      .then(() => update());
+
     navigator.mediaDevices.addEventListener('devicechange', update);
 
     return () => {
